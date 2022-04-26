@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="link_shoulder" params="name shoulder_l shoulder_w shoulder_h">
+        <link name="${name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="${shoulder_l} ${shoulder_w} ${shoulder_h}"/>
+                </geometry>
+           </visual>
+            <collision>
+                <geometry>
+                    <box size="${shoulder_l} ${shoulder_w} ${shoulder_h}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.2"/>
+                <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link_shoulder_forward" params="name shoulder_forward_l shoulder_forward_w shoulder_forward_h">
+        <link name="${name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="${shoulder_forward_l} ${shoulder_forward_w} ${shoulder_forward_h}"/>
+                </geometry>
+           </visual>
+            <collision>
+                <geometry>
+                    <box size="${shoulder_forward_l} ${shoulder_forward_w} ${shoulder_forward_h}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.4"/>
+                <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link_upper_arm" params="name upper_arm_rad upper_arm_len">
+        <link name="${name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <cylinder radius="${upper_arm_rad}" length="${upper_arm_len}"/>
+                </geometry>
+           </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${upper_arm_rad}" length="${upper_arm_len}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="1"/>
+                <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link_arm_center" params="name arm_center_l arm_center_w arm_center_h">
+        <link name="${name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 1.57"/>
+                <geometry>
+                    <box size="${arm_center_l} ${arm_center_w} ${arm_center_h}"/>
+                </geometry>
+           </visual>
+            <collision>
+                <geometry>
+                    <box size="${arm_center_l} ${arm_center_w} ${arm_center_h}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.1"/>
+                <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link_hand" params="name hand_l hand_w hand_h">
+        <link name="${name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="${hand_l} ${hand_w} ${hand_h}"/>
+                </geometry>
+           </visual>
+            <collision>
+                <geometry>
+                    <box size="${hand_l} ${hand_w} ${hand_h}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.3"/>
+                <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="joint_shoulder" params="name child origin_xyz">
+        <joint name="${name}" type="fixed">
+            <parent link="base_link"/>
+            <child link="${child}"/>
+            <origin rpy="0 0 0" xyz="${origin_xyz}"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="joint_shoulder_forward" params="name parent child origin_xyz">
+        <joint name="${name}" type="revolute">
+            <parent link="${parent}"/>
+            <child link="${child}"/>
+            <origin rpy="0 0 0" xyz="${origin_xyz}"/>
+            <limit lower="-1.57" upper="1.57" effort="10" velocity="3"/>
+            <joint_properties damping="72" friction="50" />
+            <axis xyz="0 1 0"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="joint_upper_arm" params="name parent child origin_xyz">
+        <joint name="${name}" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${child}"/>
+            <origin rpy="0 1.57 0" xyz="${origin_xyz}"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="joint_arm_center" params="name parent child origin_xyz">
+        <joint name="${name}" type="revolute">
+            <parent link="${parent}"/>
+            <child link="${child}"/>
+            <origin rpy="0 0 1.57" xyz="${origin_xyz}"/>
+            <limit lower="-1.57" upper="1.57" effort="10" velocity="3"/>
+            <joint_properties damping="72" friction="50" />
+            <axis xyz="0 0 1"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="joint_hand" params="name parent child origin_xyz">
+        <joint name="${name}" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${child}"/>
+            <origin rpy="0 0 0" xyz="${origin_xyz}"/>
+        </joint>
+    </xacro:macro>
+
+</robot>

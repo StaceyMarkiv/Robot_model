@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+    <param name="robot_description" 
+           command="$(find xacro)/xacro.py '$(find mybot_description)/urdf/my_bot.xacro'"/>
+    
+    <arg name="x" default="-2"/>
+    <arg name="y" default="2"/>
+    <arg name="z" default="0.2"/>
+    
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find mybot_description)/worlds/mynew.world"/>
+        <arg name="paused" value="true"/>
+        <arg name="verbose" value="true"/>
+    </include>
+    
+    <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"
+          args="-urdf -model my_bot -param robot_description -x $(arg x) -y $(arg y) -z $(arg z)"/>
+          
+    <rosparam file="$(find mybot_description)/control/mybot_control.yaml" command="load"/>
+
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" ns="/my_bot" 
+          args="wheel_1_left_joint_position_controller 
+                wheel_2_left_joint_position_controller 
+                wheel_3_left_joint_position_controller 
+                wheel_1_right_joint_position_controller 
+                wheel_2_right_joint_position_controller 
+                wheel_3_right_joint_position_controller 
+                left_shoulder_forward_joint_position_controller 
+                left_center_joint_position_controller 
+                right_shoulder_forward_joint_position_controller 
+                right_center_joint_position_controller 
+                neck_joint_position_controller 
+                joint_state_controller"/>
+
+    <node pkg="mybot_description" name="control_robot_python" type="control.py" output="screen"/>
+    
+</launch>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot>
+    <material name="Orange">
+        <color rgba="1.0 0.54 0.22 1.0" />
+    </material>
+    <material name="Black">
+        <color rgba="0.0 0.0 0.0 1.0"/>
+    </material>
+    <material name="Gray">
+        <color rgba="0.25 0.25 0.25 1.0"/>
+    </material>
+</robot>

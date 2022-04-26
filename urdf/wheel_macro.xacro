@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="link_wheel" params="name wheel_rad wheel_len">
+        <link name="${name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="1.57 0 0"/>
+                <geometry>
+                    <cylinder radius="${wheel_rad}" length="${wheel_len}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${wheel_rad}" length="${wheel_len}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.7"/>
+                <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link_wheel_line" params="name wheel_rad">
+        <link name="${name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <geometry>
+                    <box size="0.01 0.01 ${wheel_rad*2 - 0.05}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <box size="0.01 0.01 ${wheel_rad*2 - 0.05}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.001"/>
+                <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="joint_wheel" params="name child origin_xyz">
+        <joint name="${name}" type="continuous">
+            <parent link="base_link"/>
+            <child link="${child}"/>
+            <origin rpy="0 0 0" xyz="${origin_xyz}"/>
+            <axis xyz="0 1 0"/>
+            <limit effort="10000" velocity="1000"/>
+            <joint_properties damping="1.0" friction="1.0" />
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="joint_wheel_line" params="name parent child origin_xyz">
+        <joint name="${name}" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${child}"/>
+            <origin rpy="0 0 0" xyz="${origin_xyz}"/>
+        </joint>
+    </xacro:macro>
+
+</robot>

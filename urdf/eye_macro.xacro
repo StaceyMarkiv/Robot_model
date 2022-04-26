@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="link_ocular" params="name ocular_rad ocular_len">
+        <link name="${name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 1.57 0"/>
+                <geometry>
+                    <cylinder radius="${ocular_rad}" length="${ocular_len}"/>
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${ocular_rad}" length="${ocular_len}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.1"/>
+                <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="link_eye" params="name ocular_rad">
+        <link name="${name}">
+            <visual>
+                <origin xyz="0 0 0" rpy="0 1.57 0"/>
+                <geometry>
+                    <cylinder radius="${ocular_rad*2/3}" length="0.01"/>
+                </geometry>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${ocular_rad*2/3}" length="0.01"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.001"/>
+                <inertia ixx="1" ixy="0.0" ixz="0.0" iyy="1" iyz="0.0" izz="1"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="joint_ocular" params="name child origin_xyz">
+        <joint name="${name}" type="fixed">
+            <parent link="neck_link"/>
+            <child link="${child}"/>
+            <origin rpy="0 0 0" xyz="${origin_xyz}"/>
+        </joint>
+    </xacro:macro>
+
+    <xacro:macro name="joint_eye" params="name parent child origin_xyz">
+        <joint name="${name}" type="fixed">
+            <parent link="${parent}"/>
+            <child link="${child}"/>
+            <origin rpy="0 0 0" xyz="${origin_xyz}"/>
+        </joint>
+    </xacro:macro>
+
+</robot>

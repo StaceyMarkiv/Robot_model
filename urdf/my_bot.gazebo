@@ -1,0 +1,107 @@
+<?xml version="1.0" ?>
+<robot>
+    <gazebo reference="base_link">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+    
+    <gazebo reference="wheel_1_left">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    <gazebo reference="wheel_1_left_line">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+    <gazebo reference="wheel_2_left">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    <gazebo reference="wheel_2_left_line">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+    <gazebo reference="wheel_3_left">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    <gazebo reference="wheel_3_left_line">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+    <gazebo reference="wheel_1_right">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    <gazebo reference="wheel_1_right_line">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+    <gazebo reference="wheel_2_right">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    <gazebo reference="wheel_2_right_line">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+    <gazebo reference="wheel_3_right">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    <gazebo reference="wheel_3_right_line">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+    <gazebo reference="left_shoulder_link">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    <gazebo reference="left_shoulder_forward_link">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+    <gazebo reference="left_upper_arm_link">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+    <gazebo reference="left_center_link">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    <gazebo reference="left_hand_link">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    
+    <gazebo reference="right_shoulder_link">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    <gazebo reference="right_shoulder_forward_link">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+    <gazebo reference="right_upper_arm_link">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+    <gazebo reference="right_center_link">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    <gazebo reference="right_hand_link">
+        <material>Gazebo/Gray</material>
+    </gazebo>
+    
+    <gazebo reference="neck_link">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+    
+    <gazebo reference="left_ocular_link">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+    <gazebo reference="left_eye_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+    <gazebo reference="right_ocular_link">
+        <material>Gazebo/Orange</material>
+    </gazebo>
+    <gazebo reference="right_eye_link">
+        <material>Gazebo/Black</material>
+    </gazebo>
+    
+    <!--  Controller library  -->
+    <gazebo>
+        <plugin filename="libgazebo_ros_control.so" name="ros_control">
+            <robotNamespace>/my_bot</robotNamespace>
+        </plugin>
+    </gazebo>
+    
+
+</robot>
